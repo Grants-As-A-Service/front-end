@@ -7,7 +7,7 @@ export default function App(){
         <>
             <NavBar/>
             <text>
-                im a test
+                im a test change
             </text>
         </>
     );
