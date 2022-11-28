@@ -1,37 +1,27 @@
-import { useEffect } from 'react';
-import {
-    Navbar,
-    Nav,
-    NavItem,
-    NavLink,
-    NavbarText,
-} from 'reactstrap';
+import { useEffect } from "react";
+import { Navbar, Nav, NavItem, NavLink, NavbarText, UncontrolledDropdown, DropdownToggle, DropdownItem, DropdownMenu } from "reactstrap";
 
-
-export default function NavBar(){
-
-    useEffect(() => {
-        
-    }, [])
+export default function NavBar() {
+    useEffect(() => {}, []);
 
     return (
         <div>
-            <Navbar
-                className="my-2"
-                color="dark"
-                dark
-            >
-                <Nav navbar>
+            <Navbar className="my-2" color="dark" dark>
+                <Nav>
+                    <NavbarText>Components</NavbarText>
                     <NavItem>
-                        <NavLink href="/components/">Components</NavLink>
+                        <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
                     </NavItem>
-                    <NavItem>
-                        <NavLink href="https://github.com/reactstrap/reactstrap">
-                            GitHub
-                        </NavLink>
-                    </NavItem>
+                    <UncontrolledDropdown nav inNavbar>
+                        <DropdownToggle caret>Account</DropdownToggle>
+                        <DropdownMenu left>
+                            <DropdownItem>Option 1</DropdownItem>
+                            <DropdownItem>Option 2</DropdownItem>
+                            <DropdownItem divider />
+                            <DropdownItem>Login</DropdownItem>
+                        </DropdownMenu>
+                    </UncontrolledDropdown>
                 </Nav>
-                <NavbarText>Simple Text</NavbarText>
             </Navbar>
         </div>
     );
