@@ -1,19 +1,21 @@
-import { BrowserRouter, Router, Route, Routes } from "react-router-dom";
-import { NavBar } from "./components";
-import Register from "./views/Register";
+import { NavBar, NavigationStack, StackItem } from "./components";
+import { Registration, OnBoarding, Home } from "./components/content";
+import SideBar from "./components/sidebar/sidebar";
+import { AuthProvider } from "./providers/AuthProvider";
+import "./styles/body.scss";
 
-
-export default function App(){
-    
+export default function App() {
     return (
-        <BrowserRouter>
+        <AuthProvider>
             <NavBar />
-            <Routes>
-                <Route 
-                    path="/register"
-                    element={<Register />}
-                />
-            </Routes>
-        </BrowserRouter>
+            <div className="fullBody">
+                <SideBar />
+                <NavigationStack intialItem="Home">
+                    <StackItem name="Home" Component={Home}/>
+                    <StackItem name="Registration" Component={Registration} />
+                    <StackItem name="OnBoarding" Component={OnBoarding} />
+                </NavigationStack>
+            </div>
+        </AuthProvider>
     );
 }
