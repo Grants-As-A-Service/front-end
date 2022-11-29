@@ -6,7 +6,7 @@ export default function NavBar() {
 
     return (
         <div>
-            <Navbar className="my-2" color="dark" dark>
+            <Navbar className="fixed-top" color="dark" dark style={{ marginTop: 0}}>
                 <Nav>
                     <NavbarText>Components</NavbarText>
                     <NavItem>
