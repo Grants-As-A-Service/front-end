@@ -1,11 +1,12 @@
 import { NavBar, NavigationStack, StackItem } from "./components";
 import { Registration, OnBoarding } from "./components/content";
 import SideBar from "./components/sidebar/sidebar";
-import "./styles/body.scss"
+import { AuthProvider } from "./providers/AuthProvider";
+import "./styles/body.scss";
 
 export default function App() {
     return (
-        <div>
+        <AuthProvider>
             <NavBar />
             <div className="fullBody">
                 <SideBar />
@@ -13,8 +14,7 @@ export default function App() {
                     <StackItem name="Registration" Component={Registration} />
                     <StackItem name="OnBoarding" Component={OnBoarding} />
                 </NavigationStack>
-                
             </div>
-        </div>
+        </AuthProvider>
     );
 }

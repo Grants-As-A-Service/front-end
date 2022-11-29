@@ -1,24 +1,33 @@
-import { useEffect } from "react";
-import { Navbar, Nav, NavItem, NavLink, NavbarText, UncontrolledDropdown, DropdownToggle, DropdownItem, DropdownMenu } from "reactstrap";
+import { useEffect, useContext } from "react";
+import { Navbar, Nav, NavItem, NavLink, NavbarText, UncontrolledDropdown, DropdownToggle, DropdownItem, DropdownMenu, NavbarBrand } from "reactstrap";
+import { AuthContext } from "../../providers/AuthProvider";
 
 export default function NavBar() {
+    const { isLoggedIn } = useContext(AuthContext);
+
     useEffect(() => {}, []);
 
     return (
         <div>
             <Navbar className="default" color="dark" dark>
+                <NavbarBrand href="/">Grants As A Service (GAAS)</NavbarBrand>
                 <Nav>
-                    <NavbarText>Components</NavbarText>
-                    <NavItem>
-                        <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-                    </NavItem>
-                    <UncontrolledDropdown nav inNavbar>
+                    <UncontrolledDropdown className="justify-content-end">
                         <DropdownToggle caret>Account</DropdownToggle>
                         <DropdownMenu left>
-                            <DropdownItem>Option 1</DropdownItem>
-                            <DropdownItem>Option 2</DropdownItem>
-                            <DropdownItem divider />
-                            <DropdownItem>Login</DropdownItem>
+                            {isLoggedIn ? (
+                                <>
+                                    <DropdownItem>Account Settings</DropdownItem>
+                                    <DropdownItem>Something else</DropdownItem>
+                                    <DropdownItem divider />
+                                    <DropdownItem>Log Out</DropdownItem>
+                                </>
+                            ) : (
+                                <>
+                                    <DropdownItem>Sign Up</DropdownItem>
+                                    <DropdownItem>Log In</DropdownItem>
+                                </>
+                            )}
                         </DropdownMenu>
                     </UncontrolledDropdown>
                 </Nav>

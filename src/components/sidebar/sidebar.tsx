@@ -3,13 +3,25 @@ import { Accordion, AccordionItem, AccordionHeader, AccordionBody } from "reacts
 import { swapScreen } from "../content-stack/NavigationStack";
 
 export default function SideBar() {
-    const [open, setOpen] = useState('');
-
+    const [open, setOpen] = useState("");
+    const toggle = (id: string) => {
+        if (open === id) {
+            setOpen("");
+        } else {
+            setOpen(id);
+        }
+    };
     return (
         <div className="sideBar">
-            <Accordion flush open={open}>
+            {/*@ts-ignore*/}
+            <Accordion flush open={open} toggle={toggle}>
                 <AccordionItem>
-                    <AccordionHeader targetId="1">Accordion Item 1</AccordionHeader>
+                    <div style={{ marginTop: "5vh", marginBottom: "5vh", textAlign: 'center', fontSize: '20px' }}>
+                        <text>Our Services</text>
+                    </div>
+                </AccordionItem>
+                <AccordionItem>
+                    <AccordionHeader targetId="1">Apply For a grant</AccordionHeader>
                     <AccordionBody accordionId="1">
                         <strong>This is the first item&#39;s accordion body.</strong>
                         You can modify any of this with custom CSS or overriding our default variables. It&#39;s also worth noting that just about any
