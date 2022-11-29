@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
 
-export type SwapScreen = (screenName: string) => void;
+export type SwapScreenADT = (screenName: string) => void;
 
 type StackProps = {
-    Component: ({ swapScreen }: { swapScreen: SwapScreen }) => JSX.Element;
+    Component: ({ swapScreen }: { swapScreen: SwapScreenADT }) => JSX.Element;
     name: string;
+};
+
+export const swapScreen = (screenName: string) => {
+    window.dispatchEvent(new CustomEvent("activate-screen", { detail: { args: screenName } }));
 };
 
 export const StackItem = ({ Component, name }: StackProps) => {
     const [active, setActive] = useState(false);
 
-    const SwapScreen = (screenName: string) => {
-        window.dispatchEvent(new CustomEvent("activate-screen", { detail: { args: screenName } }));
-    };
-
     useEffect(() => {
         const listener = (event: any) => {
             let screenName = event.detail.args;
-            console.log("getting activate", screenName);
+           
             if (screenName === name && !active) {
                 setActive(true);
             }
@@ -31,10 +31,11 @@ export const StackItem = ({ Component, name }: StackProps) => {
         return () => window.removeEventListener("activate-screen", listener);
     });
 
-    return <div>{active ? <Component swapScreen={SwapScreen} /> : <></>}</div>;
+    return <>{active ? <Component swapScreen={swapScreen} /> : <></>}</>;
 };
 
 export const NavigationStack = ({ children, intialItem }: { children: React.ReactNode; intialItem: string }) => {
+
     useEffect(() => {
         window.dispatchEvent(new CustomEvent("activate-screen", { detail: { args: intialItem } }));
     }, []);

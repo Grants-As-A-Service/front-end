@@ -1,7 +1,5 @@
-import { NavBar } from "./components";
-import { NavigationStack, StackItem } from "./components/content-stack/NavigationStack";
-import Registration from "./components/content/Registration";
-import OnBoarding from "./components/content/OnBoarding";
+import { NavBar, NavigationStack, StackItem} from "./components";
+import { Registration, OnBoarding } from './components/content'
 
 
 export default function App() {
@@ -12,6 +10,8 @@ export default function App() {
                 <NavigationStack intialItem="Registration">
                     <StackItem name="Registration" Component={Registration}/>
                     <StackItem name="OnBoarding" Component={OnBoarding}/>
+
+                    
                 </NavigationStack>
             </div>
         </div>
