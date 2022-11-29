@@ -35,10 +35,10 @@ export const StackItem = ({ Component, name }: StackProps) => {
 };
 
 export const NavigationStack = ({ children, intialItem }: { children: React.ReactNode; intialItem: string }) => {
-
+    
     useEffect(() => {
         window.dispatchEvent(new CustomEvent("activate-screen", { detail: { args: intialItem } }));
     }, []);
 
-    return <div className="content">{children}</div>;
+    return <div className="fitParent" style={{ overflow: 'auto' }}>{children}</div>;
 };
