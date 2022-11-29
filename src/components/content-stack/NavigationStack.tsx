@@ -40,5 +40,5 @@ export const NavigationStack = ({ children, intialItem }: { children: React.Reac
         window.dispatchEvent(new CustomEvent("activate-screen", { detail: { args: intialItem } }));
     }, []);
 
-    return <>{children}</>;
+    return <div className="content">{children}</div>;
 };

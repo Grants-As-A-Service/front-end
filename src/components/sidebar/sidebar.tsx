@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Accordion, AccordionItem, AccordionHeader, AccordionBody } from "reactstrap";
 import { swapScreen } from "../content-stack/NavigationStack";
 
@@ -5,8 +6,8 @@ export default function SideBar() {
     const [open, setOpen] = useState('');
 
     return (
-        <div className="SideBar">
-            <Accordion flush open={true} toggle={() =>{}}>
+        <div className="sideBar">
+            <Accordion flush open={open}>
                 <AccordionItem>
                     <AccordionHeader targetId="1">Accordion Item 1</AccordionHeader>
                     <AccordionBody accordionId="1">
