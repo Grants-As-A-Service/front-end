@@ -12,6 +12,9 @@ const LandingPage = ({ swapScreen }: { swapScreen: SwapScreenADT }) => {
                     <Button color="primary" onClick={() => swapScreen("Registration")}>
                         Registration
                     </Button>
+                    <Button color="primary" onClick={() => swapScreen("ProjectOnbaord")}>
+                        Project Onboarding
+                    </Button>
                 </div>
             </div>
         </div>
