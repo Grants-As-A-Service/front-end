@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
+import EventManager from "../../utils/EventManager";
 
 export type SwapScreenADT = (screenName: string) => void;
+
+const eventManager = new EventManager()
 
 type StackProps = {
     Component: ({ swapScreen }: { swapScreen: SwapScreenADT }) => JSX.Element;
@@ -8,16 +11,14 @@ type StackProps = {
 };
 
 export const swapScreen = (screenName: string) => {
-    window.dispatchEvent(new CustomEvent("activate-screen", { detail: { args: screenName } }));
+    eventManager.emit("activate-screen", screenName);
 };
 
 export const StackItem = ({ Component, name }: StackProps) => {
     const [active, setActive] = useState(false);
 
     useEffect(() => {
-        const listener = (event: any) => {
-            let screenName = event.detail.args;
-           
+        const listener = (screenName: any) => {
             if (screenName === name && !active) {
                 setActive(true);
             }
@@ -26,19 +27,22 @@ export const StackItem = ({ Component, name }: StackProps) => {
             }
         };
 
-        window.addEventListener("activate-screen", listener);
+        eventManager.addListener("activate-screen", listener);
 
-        return () => window.removeEventListener("activate-screen", listener);
+        return () => eventManager.removeListener("activate-screen", listener);
     });
 
-    return <>{active ? <Component swapScreen={swapScreen} /> : <></>}</>;
+    return active ? <Component swapScreen={swapScreen} /> : <></>;
 };
 
 export const NavigationStack = ({ children, intialItem }: { children: React.ReactNode; intialItem: string }) => {
-    
     useEffect(() => {
-        window.dispatchEvent(new CustomEvent("activate-screen", { detail: { args: intialItem } }));
+        eventManager.emit("activate-screen", intialItem);
     }, []);
 
-    return <div className="fitParent" style={{ overflow: 'auto' }}>{children}</div>;
+    return (
+        <div className="fitParent" style={{ overflow: "auto" }}>
+            {children}
+        </div>
+    );
 };

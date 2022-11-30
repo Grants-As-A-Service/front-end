@@ -24,7 +24,9 @@ const LandingPage = ({ swapScreen }: { swapScreen: SwapScreenADT }) => {
 const HomeLoggedIn = ({ swapScreen }: { swapScreen: SwapScreenADT }) => {
     const profileData = {}; //some redux fetch or just a provider
 
-    return <div></div>;
+    return (<div>
+        
+    </div>);
 };
 
 export default function Home({ swapScreen }: { swapScreen: SwapScreenADT }) {
