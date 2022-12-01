@@ -5,6 +5,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
+declare global {
+    interface Window {
+        getCookie: (cookie: string) => any;
+    }
+}
+
 root.render(
     <React.StrictMode>
         <App />

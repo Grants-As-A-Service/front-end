@@ -5,15 +5,26 @@ import { SwapScreenADT } from "../content-stack/NavigationStack";
 
 const LandingPage = ({ swapScreen }: { swapScreen: SwapScreenADT }) => {
     return (
-        <div style={{ padding: "1%", height: "100%", width: "100%", display: "flex", flexDirection: "column" }}>
-            <p className="fs-1">Welcome to GAAS</p>
-            <div style={{ padding: "1%", height: "100%" }}>
-                <div className="shadow-lg p-3 mb-5 bg-white rounded fitParent">
+        <div className="fitParent" style={{ display: "flex", justifyContent: "center", marginTop: '5vh' }}>
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    textAlign: "center",
+                    width: "80%",
+                    gap: '10px'
+                }}
+            >
+                <p className="fs-1 p">Welcome to GAAS</p>
+                <p className="fs-4 p">Getting Started</p>
+
+                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "20px", width: "fit-content" }}>
+                    <p className="fs-7" style={{ marginBottom: "0" }}>
+                        Start by registering with us here
+                    </p>
                     <Button color="primary" onClick={() => swapScreen("Registration")}>
                         Registration
-                    </Button>
-                    <Button color="primary" onClick={() => swapScreen("ProjectOnbaord")}>
-                        Project Onboarding
                     </Button>
                 </div>
             </div>
@@ -24,9 +35,7 @@ const LandingPage = ({ swapScreen }: { swapScreen: SwapScreenADT }) => {
 const HomeLoggedIn = ({ swapScreen }: { swapScreen: SwapScreenADT }) => {
     const profileData = {}; //some redux fetch or just a provider
 
-    return (<div>
-        
-    </div>);
+    return <div></div>;
 };
 
 export default function Home({ swapScreen }: { swapScreen: SwapScreenADT }) {

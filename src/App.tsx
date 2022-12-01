@@ -11,12 +11,14 @@ export default function App() {
             <NavBar />
             <div className="fullBody">
                 <SideBar />
-                <NavigationStack intialItem="Home">
-                    <StackItem name="Home" Component={Home}/>
-                    <StackItem name="Registration" Component={Registration} />
-                    <StackItem name="OnBoarding" Component={OnBoarding} />
-                    <StackItem name="ProjectOnbaord" Component={ProjectOnbaord} />
-                </NavigationStack>
+                <div className="fitParent" style={{ overflow: "auto", padding: "1%" }}>
+                    <NavigationStack intialItem="Home">
+                        <StackItem name="Home" Component={Home} />
+                        <StackItem name="Registration" Component={Registration} />
+                        <StackItem name="OnBoarding" Component={OnBoarding} />
+                        <StackItem name="ProjectOnbaord" Component={ProjectOnbaord} />
+                    </NavigationStack>
+                </div>
             </div>
         </AuthProvider>
     );

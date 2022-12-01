@@ -1,4 +1,4 @@
-type AnyFunction = (...args: any) => any;
+type AnyFunction = (args: any) => any;
 
 export default class EventManager {
     listeners: Map<string, Array<AnyFunction>>;
