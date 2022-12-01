@@ -1,6 +1,6 @@
 import { NavBar, NavigationStack, StackItem } from "./components";
-import { Registration, OnBoarding, Home } from "./components/content";
-import ProjectOnbaord from "./components/content/ProjectOnbaord";
+import { Registration, OnBoarding, Home } from "./components/views";
+import ProjectOnbaord from "./components/views/ProjectOnbaord";
 import { Banner } from "./components/items/banner";
 import { Loader } from "./components/items/loader";
 import SideBar from "./components/sidebar/sidebar";

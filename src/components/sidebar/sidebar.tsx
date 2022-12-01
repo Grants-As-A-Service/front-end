@@ -1,50 +1,12 @@
 import { useContext, useState, useEffect } from "react";
-import { Accordion, AccordionItem, AccordionHeader, AccordionBody } from "reactstrap";
+import { UncontrolledAccordion, AccordionItem, AccordionHeader, AccordionBody, Button } from "reactstrap";
 import { getProjects } from "../../network/Querys";
 import { Account, AuthContext } from "../../providers/AuthProvider";
 import { ProjectADT } from "../../types";
+import { swapScreen } from "../content-stack/NavigationStack";
 
 const LoggedInBar = () => {
     const [projects, setProjects] = useState<Array<ProjectADT>>([]);
-
-    useEffect(() => {
-        (async () => {
-            setProjects(await getProjects());
-        })();
-    }, []);
-
-    return (
-        <>
-            <AccordionItem>
-                <AccordionHeader targetId="1">Projects</AccordionHeader>
-                <AccordionBody accordionId="1">
-                    {projects.map((project) => (
-                        <p className="fs-7 p">{project.title}</p>
-                    ))}
-                    
-                </AccordionBody>
-            </AccordionItem>
-            <AccordionItem>
-                <AccordionHeader targetId="2">Accordion Item 2</AccordionHeader>
-                <AccordionBody accordionId="2">
-                    <strong>This is the second item&#39;s accordion body.</strong>
-                    You can modify any of this with custom CSS or overriding our default variables. It&#39;s also worth noting that just about any
-                    HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                </AccordionBody>
-            </AccordionItem>
-            <AccordionItem>
-                <AccordionHeader targetId="3">Accordion Item 3</AccordionHeader>
-                <AccordionBody accordionId="3">
-                    <strong>This is the third item&#39;s accordion body.</strong>
-                    You can modify any of this with custom CSS or overriding our default variables. It&#39;s also worth noting that just about any
-                    HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                </AccordionBody>
-            </AccordionItem>
-        </>
-    );
-};
-
-export default function SideBar() {
     const { isLoggedIn, accountData } = useContext(AuthContext);
 
     const [open, setOpen] = useState("");
@@ -57,17 +19,75 @@ export default function SideBar() {
         }
     };
 
+    useEffect(() => {
+        (async () => {
+            setProjects(await getProjects());
+        })();
+    }, []);
+
     return (
-        <div className="sideBar">
+        <>
             {/*@ts-ignore*/}
-            <Accordion flush open={open} toggle={toggle}>
+            <UncontrolledAccordion flush open={open} toggle={toggle}>
                 <AccordionItem>
                     <div style={{ marginTop: "5vh", marginBottom: "5vh", textAlign: "center", fontSize: "15px" }}>
-                        {isLoggedIn ? <text>Welcome {(accountData as Account).name}</text> : <text>login or register to view our services</text>}
+                        <text>Welcome {(accountData as Account).name}</text>
                     </div>
                 </AccordionItem>
-                {isLoggedIn ? <LoggedInBar /> : <></>}
-            </Accordion>
+                <AccordionItem>
+                    <AccordionItem>
+                        <AccordionHeader targetId="1">Projects</AccordionHeader>
+                        <AccordionBody accordionId="1">
+                            {projects.length === 0 ? (
+                                <p className="fs-7" style={{ textAlign: "center" }}>
+                                    no current projects
+                                </p>
+                            ) : (
+                                <>
+                                    {projects.map((project) => (
+                                        <p className="fs-7 p">{project.title}</p>
+                                    ))}
+                                </>
+                            )}
+                            <Button
+                                color="primary"
+                                onClick={() => {
+                                    swapScreen("ProjectOnbaord");
+                                }}
+                            >
+                                new
+                            </Button>
+                        </AccordionBody>
+                    </AccordionItem>
+                    <AccordionItem>
+                        <AccordionHeader targetId="2">Accordion Item 2</AccordionHeader>
+                        <AccordionBody accordionId="2">
+                            <strong>This is the second item&#39;s accordion body.</strong>
+                            You can modify any of this with custom CSS or overriding our default variables. It&#39;s also worth noting that just about
+                            any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        </AccordionBody>
+                    </AccordionItem>
+                    <AccordionItem>
+                        <AccordionHeader targetId="3">Accordion Item 3</AccordionHeader>
+                        <AccordionBody accordionId="3">
+                            <strong>This is the third item&#39;s accordion body.</strong>
+                            You can modify any of this with custom CSS or overriding our default variables. It&#39;s also worth noting that just about
+                            any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        </AccordionBody>
+                    </AccordionItem>
+                </AccordionItem>
+            </UncontrolledAccordion>
+        </>
+    );
+};
+
+export default function SideBar() {
+    const { isLoggedIn } = useContext(AuthContext);
+    return (
+        <div className="sideBar">
+            <div style={{ marginTop: "5vh", marginBottom: "5vh", textAlign: "center", fontSize: "15px" }}>
+                {isLoggedIn ? <LoggedInBar /> : <text>login or register to view our services</text>}
+            </div>
         </div>
     );
 }
