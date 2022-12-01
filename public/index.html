@@ -34,7 +34,6 @@
             cookieStore.addEventListener("change", (event) => {
                 console.log(event)
                 if(event.deleted.length === 0) window.dispatchEvent(new CustomEvent("cookie-added", {}));
-                
             });
         </script>
         <div id="root"></div>

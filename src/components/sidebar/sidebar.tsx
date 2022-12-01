@@ -1,17 +1,27 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Accordion, AccordionItem, AccordionHeader, AccordionBody } from "reactstrap";
+import { getProjects } from "../../network/Querys";
 import { Account, AuthContext } from "../../providers/AuthProvider";
-import { swapScreen } from "../content-stack/NavigationStack";
+import { ProjectADT } from "../../types";
 
 const LoggedInBar = () => {
+    const [projects, setProjects] = useState<Array<ProjectADT>>([]);
+
+    useEffect(() => {
+        (async () => {
+            setProjects(await getProjects());
+        })();
+    }, []);
+
     return (
         <>
             <AccordionItem>
                 <AccordionHeader targetId="1">Projects</AccordionHeader>
                 <AccordionBody accordionId="1">
+                    {projects.map((project) => (
+                        <p className="fs-7 p">{project.title}</p>
+                    ))}
                     
-                    You can modify any of this with custom CSS or overriding our default variables. It&#39;s also worth noting that just about any
-                    HTML can go within the 
                 </AccordionBody>
             </AccordionItem>
             <AccordionItem>
