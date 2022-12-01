@@ -30,11 +30,13 @@ export const connect = (requestor: Requestor): Promise<any> => {
             resolve(req.response);
         };
         req.onerror = (e) => {
-            reject(req.response);
+            console.log(req.statusText)
+            reject(req.statusText);
         };
 
         req.open(request.method, address + request.url);
         req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        
         req.send(JSON.stringify(request.body));
     });
 };
