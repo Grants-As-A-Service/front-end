@@ -8,7 +8,8 @@ import { connect } from "./ServerHandler";
 const manageUiConnection = (args: Requestor): Promise<any> => {
     let promise = connect(args);
     promise.catch((message) => {
-        activateBanner("red", message);
+        console.log(message)
+        activateBanner(JSON.stringify(message), "red");
     });
     activateLoader(promise)
     return promise
