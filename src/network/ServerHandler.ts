@@ -1,3 +1,4 @@
+import { activateBanner } from "../components/items/banner";
 import { Requestor } from "./Requestor";
 
 const address = "http://127.0.0.1:4500";
@@ -26,11 +27,9 @@ export const connect = (requestor: Requestor): Promise<any> => {
                 console.log(fakeCookie);
                 window.setCookie(fakeCookie[0], fakeCookie[1] + ";");
             }
-
             resolve(req.response);
         };
         req.onerror = (e) => {
-            console.log(e);
             reject(req.response);
         };
 

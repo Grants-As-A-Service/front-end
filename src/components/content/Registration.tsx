@@ -3,10 +3,8 @@ import { SwapScreenADT } from "../content-stack/NavigationStack";
 import Icon from "../items/icon";
 import FormData from "../../static/FormData.json";
 import { useState } from "react";
-import { activateLoader } from "../items/loader";
 import { registerWithServer } from "../../network/Querys";
 import { Account } from "../../providers/AuthProvider";
-import { activateBanner } from "../items/banner";
 
 export default function Registration({ swapScreen }: { swapScreen: SwapScreenADT }) {
     const industryList = FormData.industries;
@@ -27,9 +25,9 @@ export default function Registration({ swapScreen }: { swapScreen: SwapScreenADT
                 swapScreen("OnBoarding");
             })
             .catch((error) => {
-                activateBanner(JSON.stringify(error), "red");
+               console.log('errored')
             });
-        activateLoader(loading);
+
     };
 
     return (
