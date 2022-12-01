@@ -1,18 +1,7 @@
-import { activateBanner } from "../components/items/banner";
+import { manageDevHeaders } from "./HeaderManager";
 import { Requestor } from "./Requestor";
 
 const address = "http://127.0.0.1:4500";
-
-const decipherHeaders = (xhr: XMLHttpRequest): {} => {
-    var arr = xhr.getAllResponseHeaders().split("\r\n");
-    var headers = arr.reduce(function (acc, current, i) {
-        var parts = current.split(": ");
-        //@ts-ignore
-        acc[parts[0]] = parts[1];
-        return acc;
-    }, {});
-    return headers;
-};
 
 export const connect = (requestor: Requestor): Promise<any> => {
     return new Promise((resolve, reject) => {
@@ -21,12 +10,7 @@ export const connect = (requestor: Requestor): Promise<any> => {
         const req = new XMLHttpRequest();
 
         req.onload = (e) => {
-            let headers = decipherHeaders(req) as any;
-            if (headers.hasOwnProperty("set-fake-cookie")) {
-                let fakeCookie = headers["set-fake-cookie"].split(";");
-                console.log(fakeCookie);
-                window.setCookie(fakeCookie[0], fakeCookie[1] + ";");
-            }
+            manageDevHeaders(req)
             resolve(req.response);
         };
         req.onerror = (e) => {

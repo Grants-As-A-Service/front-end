@@ -7,7 +7,7 @@ import { swapScreen } from "../content-stack/NavigationStack";
 
 const LoggedInBar = () => {
     const [projects, setProjects] = useState<Array<ProjectADT>>([]);
-    const { isLoggedIn, accountData } = useContext(AuthContext);
+    const { accountData } = useContext(AuthContext);
 
     const [open, setOpen] = useState("");
 

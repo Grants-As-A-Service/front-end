@@ -12,19 +12,10 @@ type AuthContextADT = {
     accountData: Account | null;
 };
 
-const getAccountData = () => {
-    let cookie = window.getCookie("auth");
-    if (cookie) {
-        return cookie;
-    } else {
-        return null;
-    }
-};
-
 export const AuthContext = createContext<AuthContextADT>({} as AuthContextADT);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const [isLoggedIn, setLoggedIn] = useState<boolean>(() => (window.getCookie("auth") ? true : false));
+    const [isLoggedIn, setLoggedIn] = useState<boolean>(() => (getAccountData() ? true : false));
 
     const toggleLogin = (loggedIn: boolean) => {
         if (loggedIn) {
@@ -32,7 +23,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         } else {
             setLoggedIn(false);
             window.eraseCookie("auth");
-            swapScreen('Home')
+            swapScreen("Home");
         }
     };
 
@@ -47,4 +38,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     });
 
     return <AuthContext.Provider value={{ isLoggedIn, setLoggedIn: toggleLogin, accountData: getAccountData() }}>{children}</AuthContext.Provider>;
+};
+
+const getAccountData = () => {
+    let cookie = window.getCookie("auth");
+    if (cookie) {
+        return cookie;
+    } else {
+        return null;
+    }
 };

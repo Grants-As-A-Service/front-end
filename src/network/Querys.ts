@@ -25,6 +25,11 @@ export const registerWithServer = (account: Account) => {
     );
 };
 
+
+
+
+
+
 export const getProjects = () => {
     return new Promise<Array<ProjectADT>>((resolve, reject) => {
         setTimeout(() => {
