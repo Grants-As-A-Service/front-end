@@ -3,7 +3,7 @@ import { Navbar, Nav, NavItem, NavLink, NavbarText, UncontrolledDropdown, Dropdo
 import { AuthContext } from "../../providers/AuthProvider";
 
 export default function NavBar() {
-    const { isLoggedIn } = useContext(AuthContext);
+    const { isLoggedIn, setLoggedIn } = useContext(AuthContext);
 
     useEffect(() => {}, []);
 
@@ -20,7 +20,7 @@ export default function NavBar() {
                                     <DropdownItem>Account Settings</DropdownItem>
                                     <DropdownItem>Something else</DropdownItem>
                                     <DropdownItem divider />
-                                    <DropdownItem>Log Out</DropdownItem>
+                                    <DropdownItem onClick={() => setLoggedIn(false)}>Log Out</DropdownItem>
                                 </>
                             ) : (
                                 <>
