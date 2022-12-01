@@ -3,7 +3,7 @@ import EventManager from "../../utils/EventManager";
 
 export type SwapScreenADT = (screenName: string) => void;
 
-const eventManager = new EventManager()
+const eventManager = new EventManager();
 
 type StackProps = {
     Component: ({ swapScreen }: { swapScreen: SwapScreenADT }) => JSX.Element;
@@ -40,9 +40,5 @@ export const NavigationStack = ({ children, intialItem }: { children: React.Reac
         eventManager.emit("activate-screen", intialItem);
     }, []);
 
-    return (
-        <div className="fitParent" style={{ overflow: "auto" }}>
-            {children}
-        </div>
-    );
+    return <>{children}</>;
 };

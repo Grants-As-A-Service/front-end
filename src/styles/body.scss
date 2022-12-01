@@ -15,7 +15,6 @@
     border-radius: 50%;
 }
 
-
 .sideBar {
     width: 20vw;
     height: 100%;
@@ -26,4 +25,9 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+}
+
+.p {
+    margin-bottom: 0;
+    width: fit-content;
 }
