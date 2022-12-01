@@ -2,17 +2,33 @@ import { Form, FormGroup, Label, Input, FormText, Button, Row, Col } from "react
 import { SwapScreenADT } from "../content-stack/NavigationStack";
 import Icon from "../items/icon";
 import FormData from "../../static/FormData.json";
-import { useRef } from "react";
+import { useState } from "react";
 import { activateLoader } from "../items/loader";
+import { registerWithServer } from "../../network/Querys";
+import { Account } from "../../providers/AuthProvider";
+import { activateBanner } from "../items/banner";
 
 export default function Registration({ swapScreen }: { swapScreen: SwapScreenADT }) {
     const industryList = FormData.industries;
     const provinces = FormData.provinces;
 
-    const register = () => {
-        let loading = new Promise<void>((resolve, reject) => {
-            setTimeout(resolve, 2000);
+    const [registerFeild, setRegisterFeild] = useState<Account>({} as Account);
+
+    const toggleRegisterFeild = (data: string, key: keyof Account) => {
+        setRegisterFeild((oldRestierFeild) => {
+            oldRestierFeild[key] = data;
+            return oldRestierFeild;
         });
+    };
+
+    const register = () => {
+        let loading = registerWithServer({ ...registerFeild })
+            .then(() => {
+                swapScreen("OnBoarding");
+            })
+            .catch((error) => {
+                activateBanner(JSON.stringify(error), "red");
+            });
         activateLoader(loading);
     };
 
@@ -30,10 +46,26 @@ export default function Registration({ swapScreen }: { swapScreen: SwapScreenADT
                     <Form>
                         <h5>Personal Info</h5>
                         <FormGroup>
-                            <Input type="text" name="name" id="name" placeholder="Name" />
+                            <Input
+                                onChange={(e) => {
+                                    toggleRegisterFeild(e.target.value, "name");
+                                }}
+                                type="text"
+                                name="name"
+                                id="name"
+                                placeholder="Name"
+                            />
                         </FormGroup>
                         <FormGroup>
-                            <Input type="text" name="email" id="email" placeholder="Email" />
+                            <Input
+                                onChange={(e) => {
+                                    toggleRegisterFeild(e.target.value, "email");
+                                }}
+                                type="text"
+                                name="email"
+                                id="email"
+                                placeholder="Email"
+                            />
                         </FormGroup>
                         <FormGroup>
                             <Input type="text" name="phone" id="phone" placeholder="Phone" />
