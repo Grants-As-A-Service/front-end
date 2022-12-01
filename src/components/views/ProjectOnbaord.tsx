@@ -2,8 +2,10 @@ import { Button, Col, Container, Dropdown, DropdownItem, DropdownMenu, DropdownT
 import ProjectTag from "../onboarding/ProjectTag";
 import data from "../../static/FormData.json";
 import { useState } from "react";
+import Icon from "../items/icon";
+import { SwapScreenADT } from "../content-stack/NavigationStack";
 
-export default function ProjectOnbaord() {
+export default function ProjectOnbaord({ swapScreen }: { swapScreen: SwapScreenADT }) {
     const tags = data.tags;
     const [open, setOpen] = useState(false);
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -12,6 +14,11 @@ export default function ProjectOnbaord() {
     };
     return (
         <>
+            <div style={{ position: "absolute" }}>
+                <div className="iconHover" style={{ position: "relative", top: "20px", left: "20px" }} onClick={() => swapScreen("Home")}>
+                    <Icon name="arrow_back" />
+                </div>
+            </div>
             <Container>
                 <Row className="mt-5">
                     <Col xs={12}>
