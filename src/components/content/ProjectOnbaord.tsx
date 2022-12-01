@@ -3,7 +3,7 @@ import ProjectTag from "../onboarding/ProjectTag";
 import data from "../../static/FormData.json";
 import { useState } from "react";
 
-export default function () {
+export default function ProjectOnbaord() {
     const tags = data.tags;
     const [open, setOpen] = useState(false);
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
