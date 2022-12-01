@@ -5,7 +5,7 @@ import { SwapScreenADT } from "../content-stack/NavigationStack";
 
 const LandingPage = ({ swapScreen }: { swapScreen: SwapScreenADT }) => {
     return (
-        <div className="fitParent" style={{ display: "flex", justifyContent: "center", marginTop: '5vh' }}>
+        <div className="fitParent" style={{ display: "flex", justifyContent: "center", marginTop: "5vh" }}>
             <div
                 style={{
                     display: "flex",
@@ -13,7 +13,7 @@ const LandingPage = ({ swapScreen }: { swapScreen: SwapScreenADT }) => {
                     alignItems: "flex-start",
                     textAlign: "center",
                     width: "80%",
-                    gap: '10px'
+                    gap: "10px",
                 }}
             >
                 <p className="fs-1 p">Welcome to GAAS</p>

@@ -2,10 +2,20 @@ import { Form, FormGroup, Label, Input, FormText, Button, Row, Col } from "react
 import { SwapScreenADT } from "../content-stack/NavigationStack";
 import Icon from "../items/icon";
 import FormData from "../../static/FormData.json";
+import { useRef } from "react";
+import { activateLoader } from "../items/loader";
 
 export default function Registration({ swapScreen }: { swapScreen: SwapScreenADT }) {
     const industryList = FormData.industries;
     const provinces = FormData.provinces;
+
+    const register = () => {
+        let loading = new Promise<void>((resolve, reject) => {
+            setTimeout(resolve, 2000);
+        });
+        activateLoader(loading);
+    };
+
     return (
         <>
             <div style={{ position: "absolute" }}>
@@ -81,7 +91,7 @@ export default function Registration({ swapScreen }: { swapScreen: SwapScreenADT
                         <FormGroup>
                             <Input type="number" name="revenue" id="revenue" placeholder="Approx. Annual Revenue ($)" />
                         </FormGroup>
-                        <Button color="primary" type="submit">
+                        <Button color="primary" onClick={() => register()}>
                             Register
                         </Button>
                     </Form>
