@@ -1,17 +1,17 @@
 import { useContext, useState } from "react";
 import { Accordion, AccordionItem, AccordionHeader, AccordionBody } from "reactstrap";
-import { AuthContext } from "../../providers/AuthProvider";
+import { Account, AuthContext } from "../../providers/AuthProvider";
 import { swapScreen } from "../content-stack/NavigationStack";
 
 const LoggedInBar = () => {
     return (
         <>
             <AccordionItem>
-                <AccordionHeader targetId="1">Project Grants</AccordionHeader>
+                <AccordionHeader targetId="1">Projects</AccordionHeader>
                 <AccordionBody accordionId="1">
-                    <strong>This is the first item&#39;s accordion body.</strong>
+                    
                     You can modify any of this with custom CSS or overriding our default variables. It&#39;s also worth noting that just about any
-                    HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    HTML can go within the 
                 </AccordionBody>
             </AccordionItem>
             <AccordionItem>
@@ -53,7 +53,7 @@ export default function SideBar() {
             <Accordion flush open={open} toggle={toggle}>
                 <AccordionItem>
                     <div style={{ marginTop: "5vh", marginBottom: "5vh", textAlign: "center", fontSize: "15px" }}>
-                        {isLoggedIn ? <text>Welcome {accountData?.name}</text> : <text>login or register to view our services</text>}
+                        {isLoggedIn ? <text>Welcome {(accountData as Account).name}</text> : <text>login or register to view our services</text>}
                     </div>
                 </AccordionItem>
                 {isLoggedIn ? <LoggedInBar /> : <></>}
