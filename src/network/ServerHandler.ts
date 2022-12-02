@@ -10,16 +10,19 @@ export const connect = (requestor: Requestor): Promise<any> => {
         const req = new XMLHttpRequest();
 
         req.onload = (e) => {
-            manageDevHeaders(req)
-            resolve(JSON.parse(req.response));
+            manageDevHeaders(req);
+            resolve(
+                request.responseType ==='JSON' ? JSON.parse(req.response) : req.response
+            );
         };
+  
         req.onerror = (e) => {
             reject(req.statusText);
         };
 
         req.open(request.method, address + request.url);
         req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        
+
         req.send(JSON.stringify(request.body));
     });
 };
