@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { Button } from "reactstrap";
 import { AuthContext } from "../../providers/AuthProvider";
-import { SwapScreenADT } from "../content-stack/NavigationStack";
+import { MainStackScreens, SwapScreenADT } from "../../types";
 
-const LandingPage = ({ swapScreen }: { swapScreen: SwapScreenADT }) => {
+const LandingPage = ({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreens> }) => {
     return (
         <div className="fitParent" style={{ display: "flex", justifyContent: "center", marginTop: "5vh" }}>
             <div
@@ -32,13 +32,13 @@ const LandingPage = ({ swapScreen }: { swapScreen: SwapScreenADT }) => {
     );
 };
 
-const HomeLoggedIn = ({ swapScreen }: { swapScreen: SwapScreenADT }) => {
+const HomeLoggedIn = ({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreens> }) => {
     const profileData = {}; //some redux fetch or just a provider
 
     return <div>Some dashboard view</div>;
 };
 
-export default function Home({ swapScreen }: { swapScreen: SwapScreenADT }) {
+export default function Home({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreens> }) {
     const { isLoggedIn } = useContext(AuthContext);
 
     return isLoggedIn ? <HomeLoggedIn swapScreen={swapScreen} /> : <LandingPage swapScreen={swapScreen} />;

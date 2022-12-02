@@ -3,9 +3,9 @@ import ProjectTag from "../onboarding/ProjectTag";
 import data from "../../static/FormData.json";
 import { useState } from "react";
 import Icon from "../items/icon";
-import { SwapScreenADT } from "../content-stack/NavigationStack";
+import { SwapScreenADT, MainStackScreens } from "../../types";
 
-export default function ProjectOnbaord({ swapScreen }: { swapScreen: SwapScreenADT }) {
+export default function ProjectOnbaord({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreens> }) {
     const tags = data.tags;
     const [open, setOpen] = useState(false);
     const [selectedTags, setSelectedTags] = useState<string[]>([]);

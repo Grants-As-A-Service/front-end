@@ -1,8 +1,9 @@
 import { useEffect, useContext } from "react";
 import { Navbar, Nav, NavItem, NavLink, NavbarText, UncontrolledDropdown, DropdownToggle, DropdownItem, DropdownMenu, NavbarBrand } from "reactstrap";
 import { AuthContext } from "../../providers/AuthProvider";
+import { MainStackScreens, SwapScreenADT } from "../../types";
 
-export default function NavBar() {
+export default function NavBar({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreens> }) {
     const { isLoggedIn, setLoggedIn } = useContext(AuthContext);
 
     useEffect(() => {}, []);
@@ -20,7 +21,14 @@ export default function NavBar() {
                                     <DropdownItem>Account Settings</DropdownItem>
                                     <DropdownItem>Something else</DropdownItem>
                                     <DropdownItem divider />
-                                    <DropdownItem onClick={() => setLoggedIn(false)}>Log Out</DropdownItem>
+                                    <DropdownItem
+                                        onClick={() => {
+                                            setLoggedIn(false);
+                                            swapScreen("Home");
+                                        }}
+                                    >
+                                        Log Out
+                                    </DropdownItem>
                                 </>
                             ) : (
                                 <>

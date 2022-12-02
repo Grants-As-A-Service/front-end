@@ -1,6 +1,6 @@
-import { SwapScreenADT } from "../content-stack/NavigationStack";
+import { MainStackScreens, SwapScreenADT } from "../../types";
 
-export default function OnBoarding({ swapScreen }: { swapScreen: SwapScreenADT }) {
+export default function OnBoarding({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreens> }) {
     return (
         <div>
             OnBoardingff

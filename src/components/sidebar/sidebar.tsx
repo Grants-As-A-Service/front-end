@@ -2,10 +2,9 @@ import { useContext, useState, useEffect } from "react";
 import { UncontrolledAccordion, AccordionItem, AccordionHeader, AccordionBody, Button } from "reactstrap";
 import { getProjects } from "../../network/Querys";
 import { Account, AuthContext } from "../../providers/AuthProvider";
-import { ProjectADT } from "../../types";
-import { swapScreen } from "../content-stack/NavigationStack";
+import { MainStackScreens, ProjectADT, SwapScreenADT } from "../../types";
 
-const LoggedInBar = () => {
+const LoggedInBar = ({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreens> }) => {
     const [projects, setProjects] = useState<Array<ProjectADT>>([]);
     const { accountData } = useContext(AuthContext);
 
@@ -81,12 +80,12 @@ const LoggedInBar = () => {
     );
 };
 
-export default function SideBar() {
+export default function SideBar({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreens> }) {
     const { isLoggedIn } = useContext(AuthContext);
     return (
         <div className="sideBar">
             <div style={{ marginTop: "5vh", marginBottom: "5vh", textAlign: "center", fontSize: "15px" }}>
-                {isLoggedIn ? <LoggedInBar /> : <text>login or register to view our services</text>}
+                {isLoggedIn ? <LoggedInBar swapScreen={swapScreen} /> : <text>login or register to view our services</text>}
             </div>
         </div>
     );
