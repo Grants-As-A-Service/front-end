@@ -34,9 +34,9 @@ export default function createStackNavigator<T>() {
 
             return active ? <Component swapScreen={swapScreen} {...props} /> : <></>;
         },
-        NavigationStack: function ({ children, intialItem }: { children: React.ReactNode; intialItem: string }) {
+        NavigationStack: function ({ children, intialItem }: { children: React.ReactNode; intialItem: T }) {
             useEffect(() => {
-                swapScreen(intialItem as T);
+                swapScreen(intialItem);
             }, []);
 
             return <>{children}</>;

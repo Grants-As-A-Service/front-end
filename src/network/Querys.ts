@@ -4,6 +4,7 @@ import { Account } from "../providers/AuthProvider";
 import { ProjectADT } from "../types";
 import { RequestBuilder, Requestor } from "./Requestor";
 import { connect } from "./ServerHandler";
+import Cache from "./Cache";
 
 const manageUiConnection = (args: Requestor): Promise<any> => {
     let promise = connect(args);
@@ -25,55 +26,11 @@ export const registerWithServer = (account: Account) => {
     );
 };
 
-
-
-
 export const getProjects = () => {
-    return new Promise<Array<ProjectADT>>((resolve, reject) => {
-        setTimeout(() => {
-            resolve([{
-                title: "Boats",
-                description: "some boat grant",
-                owner: "Magnus",
-                status: "under review",
-            },
-            {
-                title: "Boats",
-                description: "some boat grant",
-                owner: "Magnus",
-                status: "under review",
-            },
-            {
-                title: "Boats",
-                description: "some boat grant",
-                owner: "Magnus",
-                status: "under review",
-            },
-            {
-                title: "Boats",
-                description: "some boat grant",
-                owner: "Magnus",
-                status: "under review",
-            },
-            {
-                title: "Boats",
-                description: "some boat grant",
-                owner: "Magnus",
-                status: "under review",
-            },
-            {
-                title: "Boats",
-                description: "some boat grant",
-                owner: "Magnus",
-                status: "under review",
-            },
-            {
-                title: "Boats",
-                description: "some boat grant",
-                owner: "Magnus",
-                status: "under review",
-            },
-        ]);
-        }, 500);
-    });
+    return manageUiConnection(
+        new RequestBuilder()
+            .setURL('/testProjects')
+            .setMethod('GET')
+            .build()
+    )
 };

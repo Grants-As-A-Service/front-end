@@ -11,10 +11,9 @@ export const connect = (requestor: Requestor): Promise<any> => {
 
         req.onload = (e) => {
             manageDevHeaders(req)
-            resolve(req.response);
+            resolve(JSON.parse(req.response));
         };
         req.onerror = (e) => {
-            console.log(req.statusText)
             reject(req.statusText);
         };
 

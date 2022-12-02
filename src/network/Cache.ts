@@ -2,16 +2,13 @@ export default class Cache {
     ttl: number;
     data: any;
 
-    constructor(ttl: number) {
-        this.ttl = ttl;
+    constructor() {
+        this.ttl = 500;
         this.data = undefined;
     }
 
     addToCache(data: any) {
         this.data = data;
-        setTimeout(() => {
-            this.data = undefined;
-        }, this.ttl);
     }
 
     cacheExists() {
@@ -24,5 +21,9 @@ export default class Cache {
 
     getCache() {
         return this.data;
+    }
+
+    clearCache() {
+        this.data = undefined;
     }
 }
