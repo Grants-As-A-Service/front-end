@@ -1,4 +1,4 @@
-import { NavBar, NavigationStack, StackItem } from "./components";
+import { NavBar } from "./components";
 import { Registration, OnBoarding, Home } from "./components/views";
 import ProjectOnbaord from "./components/views/ProjectOnbaord";
 import { Banner } from "./components/items/banner";
@@ -6,22 +6,26 @@ import { Loader } from "./components/items/loader";
 import SideBar from "./components/sidebar/sidebar";
 import { AuthProvider } from "./providers/AuthProvider";
 import "./styles/body.scss";
+import createStackNavigator from "./components/content-stack/NavigationStack";
+import { MainStackScreens } from "./types";
+
+const MainStack = createStackNavigator<MainStackScreens>();
 
 export default function App() {
     return (
         <AuthProvider>
             <Banner />
-            <NavBar />
+            <NavBar swapScreen={MainStack.swapScreen} />
             <div className="fullBody">
-                <SideBar />
+                <SideBar swapScreen={MainStack.swapScreen} />
                 <div className="fitParent" style={{ overflow: "auto", padding: "1%" }}>
                     <Loader />
-                    <NavigationStack intialItem="Home">
-                        <StackItem name="Home" Component={Home} />
-                        <StackItem name="Registration" Component={Registration} />
-                        <StackItem name="OnBoarding" Component={OnBoarding} />
-                        <StackItem name="ProjectOnbaord" Component={ProjectOnbaord} />
-                    </NavigationStack>
+                    <MainStack.NavigationStack intialItem="Home">
+                        <MainStack.StackItem name="Home" Component={Home} />
+                        <MainStack.StackItem name="Registration" Component={Registration} />
+                        <MainStack.StackItem name="OnBoarding" Component={OnBoarding} />
+                        <MainStack.StackItem name="ProjectOnbaord" Component={ProjectOnbaord} />
+                    </MainStack.NavigationStack>
                 </div>
             </div>
         </AuthProvider>

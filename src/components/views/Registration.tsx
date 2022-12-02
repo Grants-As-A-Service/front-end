@@ -1,12 +1,12 @@
 import { Form, FormGroup, Label, Input, FormText, Button, Row, Col } from "reactstrap";
-import { SwapScreenADT } from "../content-stack/NavigationStack";
+import { MainStackScreens, SwapScreenADT } from "../../types";
 import Icon from "../items/icon";
 import FormData from "../../static/FormData.json";
 import { useState } from "react";
 import { registerWithServer } from "../../network/Querys";
 import { Account } from "../../providers/AuthProvider";
 
-export default function Registration({ swapScreen }: { swapScreen: SwapScreenADT }) {
+export default function Registration({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreens> }) {
     const industryList = FormData.industries;
     const provinces = FormData.provinces;
 

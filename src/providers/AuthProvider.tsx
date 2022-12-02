@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-import { swapScreen } from "../components";
 
 export type Account = {
     name: string;
@@ -23,7 +22,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         } else {
             setLoggedIn(false);
             window.eraseCookie("auth");
-            swapScreen("Home");
         }
     };
 
