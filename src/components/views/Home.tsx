@@ -51,8 +51,7 @@ const Projects = ({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreens> 
 };
 
 const HomeLoggedIn = ({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreens> }) => {
-    const { accountData } = useContext(AuthContext);
-
+    
     return (
         <div>
             <p className="fs-1 p">DashBoard</p>
@@ -96,4 +95,4 @@ export default function Home({ swapScreen }: { swapScreen: SwapScreenADT<MainSta
     const { isLoggedIn } = useContext(AuthContext);
 
     return isLoggedIn ? <HomeLoggedIn swapScreen={swapScreen} /> : <LandingPage swapScreen={swapScreen} />;
-}
+};

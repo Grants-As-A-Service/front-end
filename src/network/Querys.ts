@@ -31,6 +31,7 @@ export const getProjects = () => {
         new RequestBuilder()
             .setURL('/testProjects')
             .setMethod('GET')
+            .setResponseType('JSON')
             .build()
     )
 };

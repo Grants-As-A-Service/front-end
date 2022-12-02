@@ -1,15 +1,18 @@
-type Req = { url: string; method: string; body: any };
+type Req = { url: string; method: string; body: any; responseType: ResponseType; };
 type Method = "POST" | "GET";
+type ResponseType = "JSON" | "text"
 
 export class Requestor {
     url: string;
     method: string;
     body: any;
+    responseType: ResponseType;
 
-    constructor(url: string, method: string, body: any) {
+    constructor(url: string, method: string, responseType: ResponseType, body: any) {
         this.url = url;
         this.method = method;
         this.body = body;
+        this.responseType = responseType;
     }
 
     toObject(): Req {
@@ -17,6 +20,7 @@ export class Requestor {
             url: this.url,
             method: this.method,
             body: this.body,
+            responseType: this.responseType
         };
     }
 }
@@ -25,11 +29,11 @@ export class RequestBuilder {
     url: string | undefined;
     method: string | undefined;
     body: any | undefined;
+    responseType: ResponseType | undefined;
 
-    constructor() {
-        this.url = undefined;
-        this.method = undefined;
-        this.body = undefined;
+    setResponseType(responseType: ResponseType) {
+        this.responseType = responseType
+        return this
     }
 
     setURL(url: string) {
@@ -48,6 +52,11 @@ export class RequestBuilder {
     }
 
     build(): Requestor {
-        return new Requestor(this.url as string, this.method as string, this.body as any);
+        return new Requestor(
+            this.url as string, 
+            this.method as string, 
+            this.responseType as ResponseType, 
+            this.body as any
+        );
     }
 }
