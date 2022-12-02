@@ -1,7 +1,67 @@
-import { useContext } from "react";
-import { Button } from "reactstrap";
+import { useContext, useEffect, useState } from "react";
+import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
+import { getProjects } from "../../network/Querys";
 import { AuthContext } from "../../providers/AuthProvider";
-import { MainStackScreens, SwapScreenADT } from "../../types";
+import { MainStackScreens, ProjectADT, SwapScreenADT } from "../../types";
+
+const Projects = ({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreens> }) => {
+    const [projects, setProjects] = useState<Array<ProjectADT>>([]);
+
+    useEffect(() => {
+        (async () => {
+            setProjects(await getProjects());
+        })();
+    }, []);
+
+    return (
+        <>
+            <p className="fs-5">Current Projects</p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+                {projects.map((project, i) => (
+                    <Card
+                        key={i}
+                        style={{
+                            width: "18rem",
+                        }}
+                    >
+                        <CardBody>
+                            <CardTitle tag="h5">{project.title}</CardTitle>
+                            <CardText>{project.description}</CardText>
+                            <Button color="primary" onClick={() => swapScreen("ProjectView", { project })}>
+                                View
+                            </Button>
+                        </CardBody>
+                    </Card>
+                ))}
+                <Card
+                    style={{
+                        width: "18rem",
+                    }}
+                >
+                    <CardBody>
+                        <CardTitle tag="h5">Create New</CardTitle>
+                        <Button color="primary" onClick={() => swapScreen("ProjectOnbaord")}>
+                            New
+                        </Button>
+                    </CardBody>
+                </Card>
+            </div>
+        </>
+    );
+};
+
+const HomeLoggedIn = ({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreens> }) => {
+    const { accountData } = useContext(AuthContext);
+
+    return (
+        <div>
+            <p className="fs-1 p">DashBoard</p>
+            <div style={{ paddingLeft: "20px", paddingRight: "20px", paddingTop: "20px" }}>
+                <Projects swapScreen={swapScreen} />
+            </div>
+        </div>
+    );
+};
 
 const LandingPage = ({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreens> }) => {
     return (
@@ -30,12 +90,6 @@ const LandingPage = ({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreen
             </div>
         </div>
     );
-};
-
-const HomeLoggedIn = ({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreens> }) => {
-    const profileData = {}; //some redux fetch or just a provider
-
-    return <div>Some dashboard view</div>;
 };
 
 export default function Home({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreens> }) {

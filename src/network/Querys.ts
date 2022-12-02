@@ -28,12 +28,52 @@ export const registerWithServer = (account: Account) => {
 
 
 
-
-
 export const getProjects = () => {
     return new Promise<Array<ProjectADT>>((resolve, reject) => {
         setTimeout(() => {
-            resolve([]);
+            resolve([{
+                title: "Boats",
+                description: "some boat grant",
+                owner: "Magnus",
+                status: "under review",
+            },
+            {
+                title: "Boats",
+                description: "some boat grant",
+                owner: "Magnus",
+                status: "under review",
+            },
+            {
+                title: "Boats",
+                description: "some boat grant",
+                owner: "Magnus",
+                status: "under review",
+            },
+            {
+                title: "Boats",
+                description: "some boat grant",
+                owner: "Magnus",
+                status: "under review",
+            },
+            {
+                title: "Boats",
+                description: "some boat grant",
+                owner: "Magnus",
+                status: "under review",
+            },
+            {
+                title: "Boats",
+                description: "some boat grant",
+                owner: "Magnus",
+                status: "under review",
+            },
+            {
+                title: "Boats",
+                description: "some boat grant",
+                owner: "Magnus",
+                status: "under review",
+            },
+        ]);
         }, 500);
     });
 };

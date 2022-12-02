@@ -20,14 +20,10 @@ export default function Registration({ swapScreen }: { swapScreen: SwapScreenADT
     };
 
     const register = () => {
-        let loading = registerWithServer({ ...registerFeild })
+        registerWithServer({ ...registerFeild })
             .then(() => {
-                swapScreen("OnBoarding");
+                swapScreen("Home");
             })
-            .catch((error) => {
-               console.log('errored')
-            });
-
     };
 
     return (

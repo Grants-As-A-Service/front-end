@@ -8,6 +8,7 @@ import { AuthProvider } from "./providers/AuthProvider";
 import "./styles/body.scss";
 import createStackNavigator from "./components/content-stack/NavigationStack";
 import { MainStackScreens } from "./types";
+import ProjectView from "./components/views/ProjectView";
 
 const MainStack = createStackNavigator<MainStackScreens>();
 
@@ -25,6 +26,7 @@ export default function App() {
                         <MainStack.StackItem name="Registration" Component={Registration} />
                         <MainStack.StackItem name="OnBoarding" Component={OnBoarding} />
                         <MainStack.StackItem name="ProjectOnbaord" Component={ProjectOnbaord} />
+                        <MainStack.StackItem name="ProjectView" Component={ProjectView}/>
                     </MainStack.NavigationStack>
                 </div>
             </div>
