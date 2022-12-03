@@ -25,7 +25,7 @@ const Projects = ({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreens> 
                         }}
                     >
                         <CardBody>
-                            <CardTitle tag="h5">{project.title}</CardTitle>
+                            <CardTitle tag="h5">{project.name}</CardTitle>
                             <CardText>{project.description}</CardText>
                             <Button color="primary" onClick={() => swapScreen("ProjectView", { project })}>
                                 View

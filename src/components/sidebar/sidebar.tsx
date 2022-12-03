@@ -44,7 +44,7 @@ const LoggedInBar = ({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreen
                             ) : (
                                 <>
                                     {projects.map((project) => (
-                                        <p className="fs-7 p">{project.title}</p>
+                                        <p className="fs-7 p">{project.name}</p>
                                     ))}
                                 </>
                             )}

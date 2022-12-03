@@ -1,7 +1,17 @@
+export type ImpactTag = {
+    name: string;
+    strength: number;
+    description: string,
+}
+
 export type ProjectADT = {
-    owner: string;
-    title: string;
+    name: string;
     description: string;
+    startDate: string;
+    endDate: string;
+    capex: number;
+    annualOpex: number;
+    impactTags: ImpactTag[]
     status: string;
 };
 
