@@ -25,6 +25,9 @@ export default function(props: ProjectTagProps) {
                 />
                 <Input type="text"
                     placeholder="Description"
+                    onChange={e => {
+                        if (saved) setSaved(false);
+                    }}
                 />
             </CardBody>
             <CardFooter>

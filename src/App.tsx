@@ -25,7 +25,7 @@ export default function App() {
                         <MainStack.StackItem name="Home" Component={Home} />
                         <MainStack.StackItem name="Registration" Component={Registration} />
                         <MainStack.StackItem name="OnBoarding" Component={OnBoarding} />
-                        <MainStack.StackItem name="ProjectOnbaord" Component={ProjectOnbaord} />
+                        <MainStack.StackItem name="ProjectOnboard" Component={ProjectOnbaord} />
                         <MainStack.StackItem name="ProjectView" Component={ProjectView}/>
                     </MainStack.NavigationStack>
                 </div>
