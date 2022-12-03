@@ -15,7 +15,7 @@ export type ProjectADT = {
     status: string;
 };
 
-export type MainStackScreens = "Home" | "Registration" | "OnBoarding" | "ProjectOnbaord" | "ProjectView";
+export type MainStackScreens = "Home" | "Registration" | "OnBoarding" | "ProjectOnboard" | "ProjectView";
 
 export type SwapScreenADT<T> = (screenName: T, props?: any) => void;
 

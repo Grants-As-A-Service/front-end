@@ -51,7 +51,7 @@ const LoggedInBar = ({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreen
                             <Button
                                 color="primary"
                                 onClick={() => {
-                                    swapScreen("ProjectOnbaord");
+                                    swapScreen("ProjectOnboard");
                                 }}
                             >
                                 new
