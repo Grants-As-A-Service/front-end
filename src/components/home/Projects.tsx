@@ -23,7 +23,7 @@ export default ({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreens> })
                 </Row>
                 <Row>
                     {projects.map((project, i) => {
-                        return <Col xs={12} md={6} lg={3}>
+                        return <Col key={i} xs={12} md={6} lg={3}>
                             <Card key={i} className="mt-4">
                                 <CardHeader>
                                     <CardTitle tag="h5">{project.name}</CardTitle>

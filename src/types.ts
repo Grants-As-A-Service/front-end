@@ -15,6 +15,28 @@ export type ProjectADT = {
     status: string;
 };
 
+type UserADT = {
+    name: string,
+    email: string,
+    phone: string
+}
+
+type BusinessADT = {
+    name: string,
+    phone: string,
+    address: string,
+    city: string,
+    province: string,
+    postalCode: string,
+    industry: string,
+    projects: ProjectADT[]
+}
+
+export type AccountInfoADT = {
+    user: UserADT,
+    business: BusinessADT
+}
+
 export type MainStackScreens = "Home" | "Registration" | "OnBoarding" | "ProjectOnboard" | "ProjectView";
 
 export type SwapScreenADT<T> = (screenName: T, props?: any) => void;

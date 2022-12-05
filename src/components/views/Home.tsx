@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Button } from "reactstrap";
 import { AuthContext } from "../../providers/AuthProvider";
 import { MainStackScreens, SwapScreenADT } from "../../types";
+import BusinessInfo from "../home/BusinessInfo";
 import Projects from "../home/Projects";
 
 const HomeLoggedIn = ({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreens> }) => {
@@ -9,10 +10,9 @@ const HomeLoggedIn = ({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScree
 
     return (
         <div>
-            <p className="fs-1 p">Dashboard</p>
-            <div style={{ paddingLeft: "20px", paddingRight: "20px", paddingTop: "20px" }}>
-                <Projects swapScreen={swapScreen} />
-            </div>
+            <p className="fs-1 p">Dashboard</p>  
+            <BusinessInfo swapScreen={swapScreen} />          
+            <Projects swapScreen={swapScreen} />
         </div>
     );
 };
