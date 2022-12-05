@@ -19,7 +19,6 @@ export interface ProjectADT extends Project {
     [key: string]: string | number | ImpactTag[],
 }
 
-
 type UserADT = {
     name: string,
     email: string,

@@ -37,7 +37,13 @@ export const getProjects = () => {
 };
 
 
-//this is a test replace with actual manager
 export const onBoardProject = (project: ProjectADT) => {
-    return new Promise<void>(resolve => setTimeout(resolve, 300))
+    console.log(project)
+    return manageUiConnection(
+        new RequestBuilder()
+            .setURL('/project/create')
+            .setMethod('GET')
+            .setBody(project)
+            .build()
+    )
 }
