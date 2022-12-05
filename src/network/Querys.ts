@@ -35,3 +35,15 @@ export const getProjects = () => {
             .build()
     )
 };
+
+
+export const onBoardProject = (project: ProjectADT) => {
+    console.log(project)
+    return manageUiConnection(
+        new RequestBuilder()
+            .setURL('/project/create')
+            .setMethod('GET')
+            .setBody(project)
+            .build()
+    )
+}

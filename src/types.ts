@@ -4,7 +4,7 @@ export type ImpactTag = {
     description: string,
 }
 
-export type ProjectADT = {
+type Project = {
     name: string;
     description: string;
     startDate: string;
@@ -14,6 +14,10 @@ export type ProjectADT = {
     impactTags: ImpactTag[]
     status: string;
 };
+
+export interface ProjectADT extends Project {
+    [key: string]: string | number | ImpactTag[],
+}
 
 type UserADT = {
     name: string,
