@@ -1,9 +1,24 @@
-import { Button, Col, Container, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Form, FormGroup, Input, InputGroup, Label, Row } from "reactstrap";
+import {
+    Button,
+    Col,
+    Container,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle,
+    Form,
+    FormGroup,
+    Input,
+    InputGroup,
+    Label,
+    Row,
+} from "reactstrap";
 import ProjectTag from "../onboarding/ProjectTag";
 import data from "../../static/FormData.json";
 import { useState } from "react";
 import Icon from "../items/icon";
-import { SwapScreenADT, MainStackScreens } from "../../types";
+import { SwapScreenADT, MainStackScreens, ProjectADT, ImpactTag } from "../../types";
+import { onBoardProject } from "../../network/Querys";
 
 export default function ProjectOnbaord({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreens> }) {
     const tags = data.tags;
@@ -12,9 +27,45 @@ export default function ProjectOnbaord({ swapScreen }: { swapScreen: SwapScreenA
     const updateTags = function (newTag: string) {
         setSelectedTags([...selectedTags, newTag]);
     };
-    const [description, setDescription] = useState("");
+
+    const [projectFeilds, setProjectFeilds] = useState<ProjectADT>(
+        () =>
+            ({
+                impactTags: new Array<ImpactTag>(),
+            } as ProjectADT)
+    );
+
+    const toggleProjectFeild = (data: any, key: keyof ProjectADT, remove?: string) => {
+        setProjectFeilds((oldProjectFeild) => {
+            if (remove) {
+                let newTags = oldProjectFeild.impactTags.filter((impactTag: ImpactTag) => {
+                    return impactTag.name !== data;
+                });
+                setSelectedTags((oldSelectedTags) => {
+                    return oldSelectedTags.filter(tag => tag !== data)
+                })
+
+                oldProjectFeild.impactTags = newTags;
+            } else {
+                if (key === "impactTags") {
+                    oldProjectFeild[key].push(data);
+                } else {
+                    oldProjectFeild[key] = data;
+                }
+            }
+            console.log(oldProjectFeild);
+            return oldProjectFeild;
+        });
+    };
+
     const [descriptionWC, setDescriptionWC] = useState(0);
-    
+
+    const submit = async () => {
+        onBoardProject(projectFeilds).then(() => {
+            swapScreen('Home')
+        })
+    };
+
     return (
         <>
             <div style={{ position: "absolute" }}>
@@ -34,6 +85,7 @@ export default function ProjectOnbaord({ swapScreen }: { swapScreen: SwapScreenA
                                     name="name"
                                     id="name"
                                     placeholder="New Project"
+                                    onChange={(e) => toggleProjectFeild(e.target.value, "name")}
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -42,9 +94,9 @@ export default function ProjectOnbaord({ swapScreen }: { swapScreen: SwapScreenA
                                     className="form-control"
                                     id="description"
                                     placeholder="This project is..."
-                                    value={description}
-                                    onChange={e => {
-                                        setDescription(e.target.value.length > 3000 ? description : e.target.value);
+                                    value={projectFeilds.description}
+                                    onChange={(e) => {
+                                        toggleProjectFeild(e.target.value.length > 3000 ? projectFeilds.description : e.target.value, "description");
                                         setDescriptionWC(e.target.value.length);
                                     }}
                                 ></textarea>
@@ -61,6 +113,8 @@ export default function ProjectOnbaord({ swapScreen }: { swapScreen: SwapScreenA
                                         id="capex"
                                         className="form-control"
                                         placeholder="Capital Investment Required"
+                                        value={projectFeilds.capex}
+                                        onChange={(e) => toggleProjectFeild(e.target.value, "capex")}
                                     />
                                 </div>
                             </FormGroup>
@@ -75,24 +129,20 @@ export default function ProjectOnbaord({ swapScreen }: { swapScreen: SwapScreenA
                                         id="annualOpex"
                                         className="form-control"
                                         placeholder="Annual Operating Expenses"
+                                        value={projectFeilds.annualOpex}
+                                        onChange={(e) => toggleProjectFeild(e.target.value, "annualOpex")}
                                     />
                                 </div>
                             </FormGroup>
                             <FormGroup>
                                 <Row>
                                     <Col xs={12} md={6}>
-                                    <Label for="startDate">Start Date</Label>
-                                    <Input
-                                        type="date"
-                                        id="startDate"
-                                    />
+                                        <Label for="startDate">Start Date</Label>
+                                        <Input type="date" id="startDate" onChange={(e) => toggleProjectFeild(e.target.value, "startDate")} />
                                     </Col>
                                     <Col xs={12} md={6}>
-                                    <Label for="endDate">Start Date</Label>
-                                    <Input
-                                        type="date"
-                                        id="endDate"
-                                    />
+                                        <Label for="endDate">Start Date</Label>
+                                        <Input type="date" id="endDate" onChange={(e) => toggleProjectFeild(e.target.value, "endDate")} />
                                     </Col>
                                 </Row>
                             </FormGroup>
@@ -124,11 +174,13 @@ export default function ProjectOnbaord({ swapScreen }: { swapScreen: SwapScreenA
                         <Row className="p-5">
                             {selectedTags.map((tag) => (
                                 <Col xs={12} lg={4} md={6}>
-                                    <ProjectTag label={tag} />
+                                    <ProjectTag label={tag} update={toggleProjectFeild} />
                                 </Col>
                             ))}
                         </Row>
-                        <Button style={{width: "150px"}} color="success">Save Project</Button>
+                        <Button style={{ width: "150px" }} color="success" onClick={() => submit()}>
+                            Save Project
+                        </Button>
                     </div>
                 </Row>
             </Container>

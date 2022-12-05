@@ -35,3 +35,9 @@ export const getProjects = () => {
             .build()
     )
 };
+
+
+//this is a test replace with actual manager
+export const onBoardProject = (project: ProjectADT) => {
+    return new Promise<void>(resolve => setTimeout(resolve, 300))
+}
