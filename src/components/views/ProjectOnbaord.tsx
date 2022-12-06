@@ -31,14 +31,14 @@ export default function ProjectOnbaord({ swapScreen }: { swapScreen: SwapScreenA
     const [projectFeilds, setProjectFeilds] = useState<ProjectADT>(
         () =>
             ({
-                impactTags: new Array<ImpactTag>(),
+                tags: new Array<ImpactTag>(),
             } as ProjectADT)
     );
 
     const toggleProjectFeild = (data: any, key: keyof ProjectADT, remove?: string) => {
         setProjectFeilds((oldProjectFeild) => {
             if (remove) {
-                let newTags = oldProjectFeild.impactTags.filter((impactTag: ImpactTag) => {
+                let newTags = oldProjectFeild.tags.filter((impactTag: ImpactTag) => {
                     return impactTag.name !== data;
                 });
                 setSelectedTags((oldSelectedTags) => {
@@ -47,7 +47,7 @@ export default function ProjectOnbaord({ swapScreen }: { swapScreen: SwapScreenA
 
                 oldProjectFeild.impactTags = newTags;
             } else {
-                if (key === "impactTags") {
+                if (key === "tags") {
                     oldProjectFeild[key].push(data);
                 } else {
                     oldProjectFeild[key] = data;

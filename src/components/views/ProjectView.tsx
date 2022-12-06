@@ -68,7 +68,7 @@ export default function ProjectView({ swapScreen, project }: { swapScreen: SwapS
                             </tr>
                         </thead>
                         <tbody>
-                            {project.impactTags.map(tag => {
+                            {project.tags.map(tag => {
                                 return <tr>
                                     <td>{tag.name}</td>
                                     <td>{tag.strength}</td>

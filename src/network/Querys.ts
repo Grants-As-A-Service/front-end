@@ -1,7 +1,6 @@
 import { activateBanner } from "../components/items/banner";
 import { activateLoader } from "../components/items/loader";
-import { Account } from "../providers/AuthProvider";
-import { ProjectADT } from "../types";
+import { AccountInfoADT, ProjectADT } from "../types";
 import { RequestBuilder, Requestor } from "./Requestor";
 import { connect } from "./ServerHandler";
 import Cache from "./Cache";
@@ -16,12 +15,21 @@ const manageUiConnection = (args: Requestor): Promise<any> => {
     return promise
 };
 
-export const registerWithServer = (account: Account) => {
+export const createAccount = (accountInfo: AccountInfoADT) => {
     return manageUiConnection(
         new RequestBuilder()
-            .setURL("/testRegister")
+            .setURL("/account/create")
             .setMethod("POST")
-            .setBody(account)
+            .setBody(accountInfo)
+            .build()
+    );
+};
+
+export const getAccount = () => {
+    return manageUiConnection(
+        new RequestBuilder()
+            .setURL("/account")
+            .setMethod("GET")
             .build()
     );
 };
@@ -29,7 +37,7 @@ export const registerWithServer = (account: Account) => {
 export const getProjects = () => {
     return manageUiConnection(
         new RequestBuilder()
-            .setURL('/testProjects')
+            .setURL('/project/getAll')
             .setMethod('GET')
             .setResponseType('JSON')
             .build()
@@ -42,7 +50,7 @@ export const onBoardProject = (project: ProjectADT) => {
     return manageUiConnection(
         new RequestBuilder()
             .setURL('/project/create')
-            .setMethod('GET')
+            .setMethod('POST')
             .setBody(project)
             .build()
     )

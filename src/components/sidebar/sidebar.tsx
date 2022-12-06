@@ -1,8 +1,8 @@
 import { useContext, useState, useEffect } from "react";
 import { UncontrolledAccordion, AccordionItem, AccordionHeader, AccordionBody, Button } from "reactstrap";
 import { getProjects } from "../../network/Querys";
-import { Account, AuthContext } from "../../providers/AuthProvider";
-import { MainStackScreens, ProjectADT, SwapScreenADT } from "../../types";
+import { AuthContext } from "../../providers/AuthProvider";
+import { AccountInfoADT, MainStackScreens, ProjectADT, SwapScreenADT } from "../../types";
 
 const LoggedInBar = ({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreens> }) => {
     const [projects, setProjects] = useState<Array<ProjectADT>>([]);
@@ -30,7 +30,7 @@ const LoggedInBar = ({ swapScreen }: { swapScreen: SwapScreenADT<MainStackScreen
             <UncontrolledAccordion flush open={open} toggle={toggle}>
                 <AccordionItem>
                     <div style={{ marginTop: "5vh", marginBottom: "5vh", textAlign: "center", fontSize: "15px" }}>
-                        <text>Welcome {(accountData as Account).name}</text>
+                        <text>Welcome {(accountData as AccountInfoADT).user.name}</text>
                     </div>
                 </AccordionItem>
                 <AccordionItem>

@@ -1,14 +1,11 @@
 import { createContext, useEffect, useState } from "react";
-
-export type Account = {
-    name: string;
-    email: string;
-};
+import Cookies from "universal-cookie";
+import { AccountInfoADT } from "../types";
 
 type AuthContextADT = {
     isLoggedIn: boolean;
     setLoggedIn: (loggedIn: boolean) => void;
-    accountData: Account | null;
+    accountData: AccountInfoADT | null;
 };
 
 export const AuthContext = createContext<AuthContextADT>({} as AuthContextADT);
@@ -39,7 +36,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 const getAccountData = () => {
-    let cookie = window.getCookie("auth");
+    const cookies = new Cookies();
+    let cookie = cookies.get("auth");
+        
     if (cookie) {
         return cookie;
     } else {
